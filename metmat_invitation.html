@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>METMAT 25.0 - National Technical Symposium</title>
+    <!-- Tailwind CSS CDN for easy styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons for modern, scalable vector icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e293b, #0f172a); /* Dark gradient background */
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 20px 0;
+        }
+        .container {
+            max-width: 900px; /* Max width for larger screens */
+            width: 95%; /* Fluid width for responsiveness */
+            background-color: #1a202c; /* Slightly lighter dark background for content */
+            color: #e2e8f0; /* Light text color */
+            border-radius: 20px; /* Rounded corners for the main container */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4); /* Soft shadow for depth */
+            overflow: hidden; /* Ensures rounded corners clip content */
+            border: 1px solid #2d3748; /* Subtle border */
+        }
+        .header-banner {
+            background: linear-gradient(45deg, #6366f1, #8b5cf6, #ec4899); /* Vibrant gradient for banner */
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 2px solid #5a3d70;
+        }
+        .header-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at top left, rgba(255,255,255,0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .header-banner h1 {
+            font-size: 3.5rem; /* Large font for main title */
+            font-weight: 800; /* Extra bold */
+            margin-bottom: 10px;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Text shadow for pop */
+            letter-spacing: -1px;
+        }
+        .header-banner h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            opacity: 0.9;
+        }
+        .header-banner .dates {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #6366f1; /* Primary brand color */
+            margin-bottom: 25px;
+            text-align: center;
+            border-bottom: 2px solid #374151; /* Subtle underline */
+            padding-bottom: 10px;
+        }
+        .event-card {
+            background-color: #2d3748; /* Darker card background */
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            border: 1px solid #4a5568; /* Card border */
+            transition: transform 0.2s ease;
+        }
+        .event-card:hover {
+            transform: translateY(-5px); /* Slight lift on hover */
+        }
+        .event-card h3 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: #818cf8; /* Lighter primary color for headings */
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .event-card ul {
+            list-style: none; /* Remove default list style */
+            padding-left: 0;
+        }
+        .event-card ul li {
+            margin-bottom: 8px;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+        .event-card ul li::before {
+            content: '•'; /* Custom bullet point */
+            color: #818cf8;
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+        .contact-info div {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        .cash-prize-section {
+            background: linear-gradient(90deg, #f59e0b, #ef4444); /* Gold/Red gradient */
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 30px 0;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+            color: white;
+        }
+        .cash-prize-section h4 {
+            font-size: 3rem;
+            font-weight: 800;
+            text-shadow: 0 5px 10px rgba(0, 0, 0, 0.7);
+        }
+        .cash-prize-section p {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        .registration-button {
+            display: block;
+            width: fit-content;
+            margin: 40px auto 20px auto;
+            padding: 18px 40px;
+            background: linear-gradient(45deg, #ec4899, #8b5cf6); /* Pink-purple gradient for button */
+            color: white;
+            font-size: 1.6rem;
+            font-weight: 700;
+            border-radius: 50px; /* Pill shape */
+            text-align: center;
+            text-decoration: none;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .registration-button:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.6);
+            background: linear-gradient(45deg, #f472b6, #a78bfa); /* Lighter on hover */
+        }
+        .hashtag-section {
+            padding: 20px;
+            background-color: #1f2937;
+            border-top: 1px solid #374151;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
+        .hashtag-section p {
+            font-size: 0.9rem;
+            color: #9ca3af;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .modal-content {
+            background-color: #1f2937;
+            margin: auto;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            animation-name: animatetop;
+            animation-duration: 0.4s;
+        }
+        @keyframes animatetop {
+            from {top: -300px; opacity: 0}
+            to {top: 0; opacity: 1}
+        }
+        .close-button {
+            color: #aaa;
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close-button:hover,
+        .close-button:focus {
+            color: #fff;
+            text-decoration: none;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #e2e8f0;
+            font-weight: 600;
+        }
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #4a5568;
+            background-color: #2d3748;
+            color: #e2e8f0;
+            box-sizing: border-box;
+        }
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.5);
+        }
+        .submit-button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+        .submit-button:hover {
+            background: linear-gradient(45deg, #4f46e5, #7c3aed);
+            transform: translateY(-2px);
+        }
+        .loading-indicator {
+            display: none;
+            margin-top: 15px;
+            text-align: center;
+            color: #9ca3af;
+        }
+        .user-id-display {
+            background-color: #2d3748;
+            color: #e2e8f0;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 0.9em;
+            text-align: center;
+            word-break: break-all; /* Ensures long IDs wrap */
+        }
+        .message-box {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #4CAF50; /* Green for success */
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1001;
+            font-size: 1.1rem;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .message-box.error {
+            background-color: #f44336; /* Red for error */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .header-banner h1 {
+                font-size: 2.5rem;
+            }
+            .header-banner h2 {
+                font-size: 1.3rem;
+            }
+            .header-banner .dates {
+                font-size: 1.8rem;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+            .event-card h3 {
+                font-size: 1.4rem;
+            }
+            .event-card ul li {
+                font-size: 0.95rem;
+            }
+            .cash-prize-section h4 {
+                font-size: 2.2rem;
+            }
+            .cash-prize-section p {
+                font-size: 1.2rem;
+            }
+            .registration-button {
+                font-size: 1.3rem;
+                padding: 15px 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-banner h1 {
+                font-size: 2rem;
+            }
+            .header-banner h2 {
+                font-size: 1rem;
+            }
+            .header-banner .dates {
+                font-size: 1.5rem;
+                flex-direction: column;
+            }
+            .section-title {
+                font-size: 1.5rem;
+            }
+            .event-card h3 {
+                font-size: 1.2rem;
+            }
+            .event-card ul li {
+                font-size: 0.9rem;
+            }
+            .cash-prize-section h4 {
+                font-size: 1.8rem;
+            }
+            .cash-prize-section p {
+                font-size: 1rem;
+            }
+            .registration-button {
+                font-size: 1.1rem;
+                padding: 12px 25px;
+            }
+            .container {
+                border-radius: 10px;
+            }
+            .header-banner {
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+            }
+            .hashtag-section {
+                border-bottom-left-radius: 10px;
+                border-bottom-right-radius: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Banner/Header Section -->
+        <header class="header-banner">
+            <!-- Icon for dynamic visual, using Lucide icon 'bolt' for energy -->
+            <div class="flex justify-center mb-4">
+                <i data-lucide="zap" class="w-20 h-20 text-yellow-300"></i>
+            </div>
+            <h1 class="text-white text-7xl font-extrabold tracking-tight">METMAT 25.0</h1>
+            <h2 class="text-white text-3xl font-semibold mt-2">Get Ready for the Ultimate Showdown! 🚀</h2>
+            <div class="dates">
+                <i data-lucide="calendar-days" class="w-10 h-10 text-white"></i>
+                <span class="text-white">April 16 & 17, 2025</span>
+            </div>
+        </header>
+
+        <!-- Introduction Section -->
+        <section class="p-8 text-center bg-gray-800 text-gray-200">
+            <p class="text-lg leading-relaxed">
+                <span class="font-bold text-xl text-yellow-400">Heads up, Future Metallurgists!</span> 🚀 Government College of Engineering, Salem and Indian Institute of Metals, Salem Chapter are jointly organizing a National Level Technical Symposium just for you! Ready to level up in the world of metallurgy? Then this is where you need to be!
+            </p>
+        </section>
+
+        <!-- Event Details & Location -->
+        <section class="p-8">
+            <h2 class="section-title">💥 METMAT 25.0 - Forging Bonds, Shaping the Future! 💥</h2>
+
+            <div class="mb-10 text-center">
+                <h3 class="text-2xl font-bold text-indigo-400 mb-4 flex items-center justify-center gap-3">
+                    <i data-lucide="map-pin" class="w-8 h-8 text-red-400"></i> Location
+                </h3>
+                <p class="text-lg">Government College of Engineering, Salem - 11</p>
+                <p class="text-lg">Department of Metallurgical Engineering, Seminar Hall</p>
+            </div>
+
+            <!-- Technical Events Section -->
+            <h3 class="section-title mt-10">Showcase Your Talent! (Technical Events) 🧠✨</h3>
+            <div class="grid md:grid-cols-2 gap-6 mt-8">
+                <div class="event-card">
+                    <h3><i data-lucide="file-text" class="w-7 h-7 text-green-400"></i> Paper Presentation:</h3>
+                    <ul>
+                        <li>Present your innovative ideas in 3 to 5 minutes!</li>
+                        <li>Followed by a 2 to 3-minute Question-and-Answer session – impress us!</li>
+                        <li>**Individual participants** or **Teams of up to two members** allowed!</li>
+                        <li><i data-lucide="calendar" class="w-5 h-5 text-purple-400"></i> **Abstract Submission Deadline:** April 14, 2025 (Monday) – Don't miss it!</li>
+                    </ul>
+                </div>
+                <div class="event-card">
+                    <h3><i data-lucide="layout-template" class="w-7 h-7 text-blue-400"></i> Poster Presentation:</h3>
+                    <ul>
+                        <li>Create an awesome A3 format poster (297mm x 420mm)!</li>
+                        <li>Ensure clear, readable fonts and incorporate high-quality visuals (images, charts, diagrams)!</li>
+                        <li>The poster must focus on recent advancements, innovative ideas, or technical topics related to metallurgy. Portrait or landscape orientation is fine!</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="event-card mt-6">
+                <h3><i data-lucide="lightbulb" class="w-7 h-7 text-yellow-400"></i> Technical Quiz:</h3>
+                <ul>
+                    <li>Test your metallurgy knowledge and show us what you've got!</li>
+                    <li>**Open to individual participants only; team participation is not allowed!**</li>
+                    <li><i data-lucide="ban" class="w-5 h-5 text-red-500"></i> **Important:** Use of mobile phones or any electronic gadgets during the event is strictly prohibited!</li>
+                    <li>Questions will be displayed on a screen or provided on paper. All questions must be answered within the given time limit.</li>
+                </ul>
+            </div>
+
+            <!-- Non-Technical Events Section -->
+            <h3 class="section-title mt-10">Let's Have Some Fun! (Non-Technical Events) 🎉🥳</h3>
+            <div class="grid md:grid-cols-2 gap-6 mt-8">
+                <div class="event-card">
+                    <h3><i data-lucide="laugh" class="w-7 h-7 text-pink-400"></i> Fun Events:</h3>
+                    <ul>
+                        <li>It's not just about academics, right? We've got plenty of fun events to enjoy!</li>
+                    </ul>
+                </div>
+                <div class="event-card">
+                    <h3><i data-lucide="help-circle" class="w-7 h-7 text-cyan-400"></i> Non-Technical Quiz (General Quiz):</h3>
+                    <ul>
+                        <li>Prove you're a general knowledge king/queen!</li>
+                        <li>**Open to individual participants only; team participation is not allowed!**</li>
+                        <li><i data-lucide="ban" class="w-5 h-5 text-red-500"></i> **Important:** Use of mobile phones or any electronic gadgets during the event is strictly prohibited!</li>
+                        <li>Questions will be displayed on a screen or provided on paper. All questions must be answered within the given time limit.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cash Prize & Entry Fee -->
+        <section class="cash-prize-section">
+            <h4 class="text-white flex items-center justify-center gap-4">
+                <i data-lucide="wallet" class="w-12 h-12 text-yellow-200"></i>
+                Cash Prize: ₹10,000! 🤑
+            </h4>
+            <p class="text-white text-2xl mt-4">Who's going to win this ₹10,000? Is it you? 😉</p>
+            <p class="text-white text-lg mt-4 font-bold">Registration Fees: Rs 250/- Per Head only! (Super affordable!)</p>
+        </section>
+
+        <!-- Connect With Us Section -->
+        <section class="p-8">
+            <h3 class="section-title">Connect With Us! (Contact & Socials) 🤙</h3>
+            <div class="contact-info text-gray-300 text-center flex flex-col items-center justify-center">
+                <div class="font-bold text-lg text-indigo-300 mb-4">QUERIES CONTACT:</div>
+                <div><i data-lucide="phone" class="w-6 h-6 text-green-400"></i> Loganatha: 8072788197</div>
+                <div><i data-lucide="phone" class="w-6 h-6 text-green-400"></i> Vimal Selvan: 6374888736</div>
+                <div class="mt-4"><i data-lucide="instagram" class="w-6 h-6 text-purple-400"></i> Follow us: @metmat25.0</div>
+                <div><i data-lucide="mail" class="w-6 h-6 text-blue-400"></i> Email: metmat25.0offical@gmail.com</div>
+            </div>
+        </section>
+
+        <!-- Call to Action Button to open modal -->
+        <button id="registerButton" class="registration-button">
+            ⚡️ Register Now! ⚡️
+        </button>
+
+        <!-- User ID Display -->
+        <div id="userIdDisplay" class="user-id-display mx-auto w-fit">
+            Your User ID: Loading...
+        </div>
+
+        <!-- Hashtags Section -->
+        <section class="hashtag-section p-6">
+            <p class="text-gray-400 text-sm leading-relaxed">
+                #METMAT25 #GCESalem #MetallurgicalEngineering #TamilNaduYouth #StudentLife #TechnicalSymposium #AnnaUniversity #SalemEvents #EngineeringStudents #CashPrize #TrendingTamil #ForgingBonds #FutureTech #DontMissIt #CollegeEvents #April16_17
+            </p>
+        </section>
+    </div>
+
+    <!-- Registration Modal -->
+    <div id="registrationModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3 class="text-2xl font-bold text-indigo-400 mb-6 text-center">METMAT 25.0 Registration</h3>
+            <form id="registrationForm">
+                <div class="form-group">
+                    <label for="name">Full Name:</label>
+                    <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required placeholder="Enter your email address">
+                </div>
+                <div class="form-group">
+                    <label for="college">College/Institution:</label>
+                    <input type="text" id="college" name="college" required placeholder="Your College/Institution Name">
+                </div>
+                <div class="form-group">
+                    <label for="events">Select Events (Ctrl+Click for multiple):</label>
+                    <select id="events" name="events" multiple size="6" required>
+                        <option value="Paper Presentation">Paper Presentation</option>
+                        <option value="Poster Presentation">Poster Presentation</option>
+                        <option value="Technical Quiz">Technical Quiz</option>
+                        <option value="Fun Events">Fun Events</option>
+                        <option value="Non-Technical Quiz">Non-Technical Quiz (General)</option>
+                    </select>
+                </div>
+                <button type="submit" class="submit-button" id="submitRegButton">Register</button>
+                <div id="loadingIndicator" class="loading-indicator">Submitting...</div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Message Box for notifications -->
+    <div id="messageBox" class="message-box"></div>
+
+    <!-- Firebase SDKs -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+        // Global variables for Firebase instances
+        let app;
+        let db;
+        let auth;
+        let userId = 'loading...';
+        let isAuthReady = false;
+
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        const userIdDisplay = document.getElementById('userIdDisplay');
+        const registrationModal = document.getElementById('registrationModal');
+        const registerButton = document.getElementById('registerButton');
+        const closeButton = document.querySelector('.close-button');
+        const registrationForm = document.getElementById('registrationForm');
+        const submitRegButton = document.getElementById('submitRegButton');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+        const messageBox = document.getElementById('messageBox');
+
+        // Function to show messages
+        function showMessage(message, type = 'success') {
+            messageBox.textContent = message;
+            messageBox.className = 'message-box ' + type; // Reset classes and add type
+            messageBox.style.opacity = 1;
+            messageBox.style.display = 'block';
+
+            // Hide after 3 seconds
+            setTimeout(() => {
+                messageBox.style.opacity = 0;
+                setTimeout(() => messageBox.style.display = 'none', 500); // Wait for fade out
+            }, 3000);
+        }
+
+        // Initialize Firebase and Auth
+        window.onload = async function() {
+            try {
+                if (Object.keys(firebaseConfig).length > 0) {
+                    app = initializeApp(firebaseConfig);
+                    db = getFirestore(app);
+                    auth = getAuth(app);
+
+                    onAuthStateChanged(auth, async (user) => {
+                        if (user) {
+                            userId = user.uid;
+                            userIdDisplay.textContent = `Your User ID: ${userId}`;
+                        } else {
+                            // Sign in anonymously if no user is found
+                            try {
+                                if (initialAuthToken) {
+                                    await signInWithCustomToken(auth, initialAuthToken);
+                                } else {
+                                    await signInAnonymously(auth);
+                                }
+                            } catch (error) {
+                                console.error("Error during anonymous sign-in:", error);
+                                userIdDisplay.textContent = `Error getting User ID.`;
+                                showMessage("Error authenticating. Please try again.", "error");
+                            }
+                        }
+                        isAuthReady = true;
+                    });
+                } else {
+                    console.warn("Firebase config not found. Running in a limited mode without data persistence.");
+                    userIdDisplay.textContent = "Firebase not configured.";
+                    isAuthReady = true; // Still allow form to show, but submission will fail
+                }
+            } catch (error) {
+                console.error("Error initializing Firebase:", error);
+                userIdDisplay.textContent = "Firebase Init Error.";
+                showMessage("Failed to initialize app services.", "error");
+            }
+            lucide.createIcons(); // Initialize Lucide icons
+        };
+
+        // Modal Open/Close Logic
+        registerButton.onclick = function() {
+            registrationModal.style.display = 'flex'; // Use flex to center
+        }
+
+        closeButton.onclick = function() {
+            registrationModal.style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == registrationModal) {
+                registrationModal.style.display = 'none';
+            }
+        }
+
+        // Form Submission Logic
+        registrationForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (!isAuthReady || !db || !auth.currentUser) {
+                showMessage("App services not ready. Please wait a moment or refresh.", "error");
+                return;
+            }
+
+            submitRegButton.disabled = true;
+            loadingIndicator.style.display = 'block';
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const college = document.getElementById('college').value;
+            const selectedEvents = Array.from(document.getElementById('events').selectedOptions).map(option => option.value);
+
+            const registrationData = {
+                userId: auth.currentUser.uid,
+                name: name,
+                email: email,
+                college: college,
+                events: selectedEvents,
+                timestamp: serverTimestamp() // Add server timestamp
+            };
+
+            try {
+                // Store in public collection for easy viewing for this demo
+                const registrationsRef = collection(db, `artifacts/${appId}/public/data/registrations`);
+                await addDoc(registrationsRef, registrationData);
+                showMessage("Registration successful! See you there!");
+                registrationForm.reset();
+                registrationModal.style.display = 'none'; // Close modal on success
+            } catch (error) {
+                console.error("Error saving registration:", error);
+                showMessage("Registration failed. Please try again.", "error");
+            } finally {
+                submitRegButton.disabled = false;
+                loadingIndicator.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
